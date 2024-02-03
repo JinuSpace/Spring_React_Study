@@ -11,5 +11,5 @@ Backend에서 Data 받아오기 완료<br/>
 
 
 ===========TODO============<br/>
-Swagger\n
-DB설계\n
+Swagger
+DB설계
