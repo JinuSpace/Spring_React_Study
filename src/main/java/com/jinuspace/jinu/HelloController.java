@@ -9,9 +9,8 @@ import java.util.Date;
 @RequestMapping("/api")
 public class HelloController {
 
-    @GetMapping("/hello")
+    @GetMapping("/test")
     public String hello() {
-        return "Hello from Spring Boot!";
+        return "테스트입니다.";
     }
-
 }
