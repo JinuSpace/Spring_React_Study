@@ -1,6 +1,6 @@
 # 혼자 공부해보는 Spring, React
 ### ===========TODO============
-Swagger<br/>
+
 DB설계<br/>
  
 ### 
@@ -17,7 +17,9 @@ Backend에서 Data 받아오기 완료<br/>
 ### 2024.02.04
 
 ===========BackEnd============<br/>
-LogBack연동, 테스트<br/>
+LogBack 연동<br/>
+Swagger 연동<br/>
+application.properties -> .yml 으로 변경
 
 
 
