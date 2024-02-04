@@ -10,7 +10,7 @@ import lombok.*;
 @NoArgsConstructor
 @Entity
 @Table(name = "test")
-public class Test {
+public class TestDTO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long test_id;
