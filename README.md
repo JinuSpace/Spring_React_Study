@@ -2,6 +2,8 @@
 ### =========== TODO ============
 
 DB설계<br/>
+JWT<br/>
+Redis(토큰 저장용)<br/>
  
 ### 
 ## PatchNote
