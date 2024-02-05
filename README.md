@@ -4,6 +4,8 @@
 DB설계<br/>
 JWT<br/>
 Redis(토큰 저장용)<br/>
+
+* Swagger에서 Restdocs로 전환?
  
 ### 
 ## PatchNote
