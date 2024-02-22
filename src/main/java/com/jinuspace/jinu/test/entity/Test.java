@@ -1,4 +1,4 @@
-package com.jinuspace.jinu.DTO;
+package com.jinuspace.jinu.test.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -10,7 +10,7 @@ import lombok.*;
 @NoArgsConstructor
 @Entity
 @Table(name = "test")
-public class TestDTO {
+public class Test {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long test_id;

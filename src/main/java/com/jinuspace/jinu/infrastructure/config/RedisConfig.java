@@ -1,4 +1,4 @@
-package com.jinuspace.jinu.Config;
+package com.jinuspace.jinu.infrastructure.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;

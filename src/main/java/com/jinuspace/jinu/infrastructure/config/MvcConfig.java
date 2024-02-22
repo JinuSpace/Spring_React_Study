@@ -1,7 +1,6 @@
-package com.jinuspace.jinu.Config;
+package com.jinuspace.jinu.infrastructure.config;
 
 import org.springframework.context.annotation.Configuration;
-import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 

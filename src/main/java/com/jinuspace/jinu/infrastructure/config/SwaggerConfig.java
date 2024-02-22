@@ -1,4 +1,4 @@
-package com.jinuspace.jinu.Config;
+package com.jinuspace.jinu.infrastructure.config;
 
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;

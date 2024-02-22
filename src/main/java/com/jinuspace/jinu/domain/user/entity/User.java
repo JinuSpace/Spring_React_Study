@@ -1,7 +1,10 @@
-package com.jinuspace.jinu.DTO;
+package com.jinuspace.jinu.domain.user.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -9,7 +12,7 @@ import lombok.*;
 @Setter
 @Entity
 @Table(name = "USER_TB")
-public class UserDTO {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
