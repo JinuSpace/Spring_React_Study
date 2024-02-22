@@ -3,8 +3,7 @@
 
 DB설계<br/>
 JWT<br/>
-Redis(토큰 저장용)<br/>
-공공데이터 DB저장
+공공데이터 DB저장<br/>
 
 
 * Swagger에서 Restdocs로 전환?
@@ -27,6 +26,9 @@ LogBack 연동<br/>
 Swagger 연동<br/>
 application.properties -> .yml 으로 변경
 
+### 2024.02.21
 
+=========== BackEnd ============<br/>
+Redis 연동<br/>
 
 
