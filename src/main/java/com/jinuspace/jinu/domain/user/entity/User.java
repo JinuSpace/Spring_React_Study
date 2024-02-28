@@ -1,22 +1,21 @@
 package com.jinuspace.jinu.domain.user.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-@AllArgsConstructor
-@NoArgsConstructor
+
 @Getter
 @Setter
+@Table(name = "qqasdasdqq")
 @Entity
-@Table(name = "USER_TB")
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name="t",nullable = false)
-    private  String textText;
+    @Column(name="name",nullable = false)
+    private  String name;
 }

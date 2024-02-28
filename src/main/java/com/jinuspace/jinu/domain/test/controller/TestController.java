@@ -1,7 +1,7 @@
-package com.jinuspace.jinu.test.controller;
+package com.jinuspace.jinu.domain.test.controller;
 
 
-import com.jinuspace.jinu.test.entity.Test;
+import com.jinuspace.jinu.domain.test.entity.Test;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;

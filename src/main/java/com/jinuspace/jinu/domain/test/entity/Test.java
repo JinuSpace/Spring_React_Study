@@ -1,4 +1,4 @@
-package com.jinuspace.jinu.test.entity;
+package com.jinuspace.jinu.domain.test.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
