@@ -22,15 +22,32 @@ repositories {
 }
 
 dependencies {
+	// Spring Boot Starter for Web Applications
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+
+	// Lombok
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
+
+	// Testing Dependencies
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	implementation 'javax.servlet:javax.servlet-api:3.1.0'
+
+	// Servlet API - 컴파일 전용
+	compileOnly 'javax.servlet:javax.servlet-api:3.1.0'
+
+	// OpenAPI (Swagger UI)
 	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.2'
-	runtimeOnly "com.mysql:mysql-connector-j"
+
+	// MySQL JDBC Driver
+	implementation 'com.mysql:mysql-connector-j'
+
+	// JPA (Java Persistence API) for database interactions
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+	// Spring Security for authentication and authorization
 	implementation 'org.springframework.boot:spring-boot-starter-security'
+
+	// Redis starter for caching and Redis-based session management
 	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
 }
 

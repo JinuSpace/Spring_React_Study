@@ -27,7 +27,7 @@ public class TestController {
                     content = {@Content(schema = @Schema(implementation = Test.class))}),
             @ApiResponse(responseCode = "404", description = "해당 ID의 유저가 존재하지 않습니다."),
     })
-    public String hello() {
+    public String test() {
         log.info("=========Info 로그 찍힌다=============");
         return "테스트입니다.";
     }
