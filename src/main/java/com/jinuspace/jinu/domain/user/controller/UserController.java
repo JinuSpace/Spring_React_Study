@@ -1,16 +1,13 @@
 package com.jinuspace.jinu.domain.user.controller;
 
+import com.jinuspace.jinu.domain.user.dto.JoinRequestDto;
 import com.jinuspace.jinu.domain.user.dto.LoginRequestDto;
+import com.jinuspace.jinu.domain.user.entity.User;
 import com.jinuspace.jinu.domain.user.service.UserService;
-import com.jinuspace.jinu.test.entity.Test;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @Slf4j
@@ -18,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api")
 @Tag(name = "예제 API", description = "Swagger 테스트용 API")
 
-public class LoginController {
+public class UserController {
     @Autowired
     private UserService userService;
 
@@ -30,6 +27,16 @@ public class LoginController {
             return "로그인 성공";
         } else {
             return "로그인 실패";
+        }
+    }
+
+    @PostMapping("/join")
+    public ResponseEntity<String> join(@RequestBody JoinRequestDto joinRequestDto) {
+        try {
+            User newUser = userService.join(joinRequestDto);
+            return ResponseEntity.ok("User 등록 성공 : " + newUser.getEmail());
+        }catch (Exception e){
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 }
