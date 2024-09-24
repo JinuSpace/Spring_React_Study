@@ -17,10 +17,21 @@ public class UserService {
     private UserRepository userRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
-    public boolean authenticate(LoginRequestDto loginRequestDto) {
+    public Optional<User> authenticate(LoginRequestDto loginRequestDto) {
         Optional<User> user = userRepository.findByEmail(loginRequestDto.getEmail());
 
-        return user.isPresent() && passwordEncoder.matches(loginRequestDto.getPassword(), user.get().getPassword());
+        if (user.isEmpty()) {
+            return Optional.empty();  // 이메일이 없으면 Optional.empty() 반환
+        }
+
+        User authenticatedUser = user.get();
+
+        // 비밀번호가 일치하면 유저 정보를 포함한 Optional 반환, 그렇지 않으면 Optional.empty() 반환
+        if (passwordEncoder.matches(loginRequestDto.getPassword(), authenticatedUser.getPassword())) {
+            return Optional.of(authenticatedUser);  // 성공 시 유저 정보를 반환
+        } else {
+            return Optional.empty();  // 실패 시 Optional.empty() 반환
+        }
     }
 
     public User join(JoinRequestDto joinRequestDto)throws Exception {
@@ -32,6 +43,7 @@ public class UserService {
         User newUser = User.builder().
                 email(joinRequestDto.getEmail()).
                 password(passwordEncoder.encode(joinRequestDto.getPassword())).
+                name(joinRequestDto.getName()).
                 role(joinRequestDto.getUserRole()).
                 build();
 

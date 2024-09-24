@@ -8,6 +8,7 @@ import lombok.Setter;
 @Setter
 public class JoinRequestDto {
     String email;
+    String name;
     String password;
     UserRole userRole;
 }
