@@ -4,6 +4,7 @@ import com.jinuspace.jinu.domain.user.entity.UserRole;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -11,6 +12,7 @@ import java.security.Key;
 import java.util.Date;
 
 @Component
+@Slf4j
 public class JwtUtil {
 
     @Value("${jwt.secret-key}")
@@ -23,7 +25,8 @@ public class JwtUtil {
     public String createToken(String email, String userName, UserRole role) {
         Key key = Keys.hmacShaKeyFor(secretKey.getBytes());
 
-        String token = Jwts.builder()
+
+        return Jwts.builder()
                 .claim("email", email)
                 .claim("userName", userName)  // 사용자 이름 클레임 추가
                 .claim("role", role)  // 역할(role) 클레임 추가
@@ -31,8 +34,6 @@ public class JwtUtil {
                 .setExpiration(new Date(System.currentTimeMillis() + expiredMs))  // 만료 시간 설정
                 .signWith(key)  // 서명 키와 함께 서명
                 .compact();  // JWT 생성
-
-        return "Bearer " + token;  // Bearer 문자열 추가
     }
 
     // JWT에서 사용자 이메일 추출
@@ -57,13 +58,19 @@ public class JwtUtil {
 
     // JWT에서 모든 클레임 추출
     private Claims extractClaims(String token) {
+        log.error("token:{}", token);
+        if (token == null || token.isBlank()) {
+            throw new IllegalArgumentException("JWT token is null or empty.");
+        }
+
         Key key = Keys.hmacShaKeyFor(secretKey.getBytes());
         return Jwts.parserBuilder()
-                .setSigningKey(key)  // 서명에 사용할 키 설정
+                .setSigningKey(key)
                 .build()
-                .parseClaimsJws(token.replace("Bearer ", ""))  // Bearer 제거 후 토큰 파싱
-                .getBody();  // 클레임을 가져옴
+                .parseClaimsJws(token.replace("Bearer ", ""))
+                .getBody();
     }
+
 
     // JWT 만료 여부 확인
     public boolean isTokenExpired(String token) {

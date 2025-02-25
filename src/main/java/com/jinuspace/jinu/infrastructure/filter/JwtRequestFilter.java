@@ -5,50 +5,67 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Cookie;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
-import jakarta.servlet.http.Cookie;
 
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Base64;
+import java.util.Collections;
 
 @Component
+@Slf4j
 public class JwtRequestFilter extends OncePerRequestFilter {
 
     @Autowired
     private JwtUtil jwtUtil;
+
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
+        log.info("JwtRequestFilter doFilterInternal");
 
-        // 쿠키에서 토큰 가져오기
-        String encodedToken = null;
-        if (request.getCookies() != null) {
-            encodedToken = Arrays.stream(request.getCookies())
-                    .filter(cookie -> "jwt-token".equals(cookie.getName()))
-                    .map(Cookie::getValue)
-                    .findFirst()
-                    .orElse(null);
+        // ✅ 헤더에서 JWT 가져오기
+        String authorizationHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
+        String token = null;
+
+        if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
+            token = authorizationHeader.substring(7); // "Bearer " 제거
         }
-        System.out.println(encodedToken);
-        byte[] decodedBytes = Base64.getUrlDecoder().decode(encodedToken);
-        String token = new String(decodedBytes);
 
+        log.info("JwtRequestFilter token: {}", token);
 
-        // 토큰이 있으면 검증 및 권한 설정
-        if (token != null && jwtUtil.validateToken(token)) {
-            // 토큰에서 사용자 이름 및 역할 추출
-            String username = jwtUtil.extractEmail(token);
+        if (token == null) {
+            filterChain.doFilter(request, response);
+            return;
+        }
+
+        // ✅ JWT 검증
+        if (jwtUtil.validateToken(token)) {
+            String email = jwtUtil.extractEmail(token);
+            String userName = jwtUtil.extractUserName(token);
             String role = jwtUtil.extractUserRole(token);
 
-            // 요청에 사용자 이름과 역할을 속성으로 추가 (다른 부분에서 사용 가능하게 설정)
-            request.setAttribute("username", username);
+            UserDetails userDetails = new User(userName, "", Collections.emptyList());
+            UsernamePasswordAuthenticationToken authentication =
+                    new UsernamePasswordAuthenticationToken(userDetails, null, Collections.emptyList());
+
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+
+            // ✅ 현재 요청 객체에 사용자 정보 저장
+            request.setAttribute("email", email);
+            request.setAttribute("userName", userName);
             request.setAttribute("role", role);
         }
 
-        // 다음 필터 또는 최종 목적지로 요청을 전달
         filterChain.doFilter(request, response);
     }
 }

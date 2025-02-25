@@ -33,10 +33,10 @@ public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws
     return httpSecurity
             .httpBasic(AbstractHttpConfigurer::disable)
             .csrf(AbstractHttpConfigurer::disable)
-            .cors(AbstractHttpConfigurer::disable)
+            .cors(cors -> cors.configure(httpSecurity))
             .authorizeHttpRequests(requests -> {
                 requests.requestMatchers("/api/login", "/api/join").permitAll();
-                requests.requestMatchers(HttpMethod.POST, "/api/articles").authenticated();
+                requests.requestMatchers(HttpMethod.POST, "/api/board").authenticated();
             })
             .sessionManagement(
                     sessionManagement ->

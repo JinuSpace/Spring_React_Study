@@ -26,5 +26,8 @@ spring:
       path: /v3/api-docs/swagger-config
 
 jwt:
-  secret-key: "a-very-long-secret-key-that-is-at-least-256-bits"
+  secret-key: "aaaaaaaaaaabbbbbbbbbbbcccccccccccccddddddddeeeeeffffffffggggasldkjalskdjaksjdlakjsdlkajsdkjasdkjalskdjlaksjdlkasjd
+  aslkdjlakjsdlkajsldkjalskdjlaksjdlkajsdlkajsldkjaslkdjalskjdalksjdlakjsdlkajsldkjasldkjalskdjalksjdlaksjdlakjsdlkajsldkajslkdjalsjd
+  lakjsdlkajsldjaslkdjalskdjalksdjqoliwejqwliejlqksjdlkajsldkajlskdjalskdjalksdjalskdjlaksjdlasjdlaksjdlaksjdlzkxjclzkjxclkzjxcz
+  alskdjlaksjdlasjdlakjsdlkajsldkjaklsdj"
   expiration-ms: 3600000 # 1 hour

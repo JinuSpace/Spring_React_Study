@@ -12,6 +12,6 @@ public class MvcConfig implements WebMvcConfigurer {
                 .allowedOrigins("http://localhost:3000")  // 프론트엔드 URL
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                 .allowedHeaders("*")
-                .allowCredentials(true);
+                .allowCredentials(true); // 쿠키 허용
     }
 }
