@@ -35,8 +35,9 @@ public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws
             .csrf(AbstractHttpConfigurer::disable)
             .cors(cors -> cors.configure(httpSecurity))
             .authorizeHttpRequests(requests -> {
-                requests.requestMatchers("/api/login", "/api/join").permitAll();
-                requests.requestMatchers(HttpMethod.POST, "/api/board").authenticated();
+                requests.requestMatchers("/api/login", "/api/join", "/api/boards/**", "/api/posts/**").permitAll();
+//                requests.requestMatchers(HttpMethod.POST, "/api/board").authenticated();
+                requests.anyRequest().permitAll();
             })
             .sessionManagement(
                     sessionManagement ->
